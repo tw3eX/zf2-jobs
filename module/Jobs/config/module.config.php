@@ -10,7 +10,7 @@ return array(
     // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
-            'album' => array(
+            'jobs' => array(
                 'type'    => 'segment',
                 'options' => array(
                     'route'    => '/jobs[/:action][/:id]',
@@ -25,6 +25,20 @@ return array(
                 ),
             ),
         ),
+    ),
+
+    'doctrine' => array(
+        'driver' => array(
+            'jobs_entity' => array(
+                'class' =>'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
+                'paths' => array(__DIR__ . '/../src/Jobs/Entity')
+            ),
+            'orm_default' => array(
+                'drivers' => array(
+                    'Jobs\Entity' => 'jobs_entity',
+                )
+            )
+        )
     ),
 
     'view_manager' => array(
