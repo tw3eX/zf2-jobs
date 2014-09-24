@@ -41,4 +41,6 @@ Then:
 
 Pictures
 -----
-![alt tag](http://static.zend.com/cmsdata/static-assets/img/zend-logo-big.gif)
+![alt tag](http://s017.radikal.ru/i409/1409/53/d60d233e62ca.png)
+![alt tag](http://i069.radikal.ru/1409/07/e5b8d2f884d6.png)
+![alt tag](http://s019.radikal.ru/i640/1409/3c/d3dd1bc3513b.png/)
