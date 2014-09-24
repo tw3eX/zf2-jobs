@@ -32,4 +32,22 @@ class Module
         return include __DIR__ . '/config/module.config.php';
     }
 
+    public function getServiceConfig()
+    {
+        return array(
+            'factories' => array(
+                'DepartmentService' =>  function($sm)
+                    {
+                        $em = $sm->get('Doctrine\ORM\EntityManager');
+                        return new \Jobs\Service\DepartmentService($sm, $em);
+                    },
+                'LanguageService' =>  function($sm)
+                    {
+                        $em = $sm->get('Doctrine\ORM\EntityManager');
+                        return new \Jobs\Service\LanguageService($sm, $em);
+                    }
+            ),
+        );
+    }
+
 }

@@ -1,0 +1,48 @@
+<?php
+namespace JobsTest\Service;
+use Jobs\Service;
+use JobsTest\Bootstrap;
+use PHPUnit_Framework_TestCase;
+
+class DepartmentTest extends \PHPUnit_Framework_TestCase
+{
+    protected $serviceManager;
+    protected $departmentService;
+
+    protected function setUp()
+    {
+        $this->serviceManager = Bootstrap::getServiceManager();
+    }
+
+    public function testCanGetDepartmentById()
+    {
+        // Create a dummy department entity
+        $department = new \Jobs\Entity\Department();
+
+        // Set department fields
+        $department->setId(123);
+        $department->setName('It Department');
+
+        // Mock the entity manager, find should return our dummy department
+        $emMock = $this->getMock('EntityManager',
+            array('getRepository', 'getClassMetadata', 'persist', 'flush', 'find'), array(), '', false);
+        $emMock->expects( $this->any() )
+            ->method( 'find' )
+            ->will( $this->returnValue( $department ) );
+
+        // Create a new instance of the department service injecting our mocked entity manager
+        $departmentService = new \Jobs\Service\DepartmentService($this->serviceManager, $emMock);
+
+        // Call the service requesting department 123
+        $responseDepartment = $departmentService->getDepartmentById( 123 );
+
+        // Check the response is a department entity
+        $this->assertInstanceOf('Jobs\Entity\Department', $responseDepartment);
+
+        // Check that the returned entity is our dummy department
+        $this->assertEquals(123, $responseDepartment->getId());
+        $this->assertNotEquals(124, $responseDepartment->getId());
+        $this->assertEquals('It Department', $responseDepartment->getName());
+        $this->assertNotEquals('It Department -', $responseDepartment->getName());
+    }
+}
