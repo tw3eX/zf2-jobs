@@ -28,4 +28,16 @@ class Department
      */
     protected $name;
 
+    public function getName(){
+        return $this->name;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
 }

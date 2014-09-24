@@ -38,4 +38,37 @@ class Job
         $this->translations = new ArrayCollection();
     }
 
+    public function getDepartment(){
+        return $this->department;
+    }
+
+    /**
+     * Get title.
+     *
+     * @return string
+     */
+    public function getTranslation($language)
+    {
+        $default_language = 'en';
+
+        $translations = $this->translations->filter(function($translation) use ($language) {
+             return in_array($translation->getLanguage(), array($language));
+         });
+        $translation = $translations->first();
+        if(!$translation && $language != $default_language){
+            return $this->getTranslation($default_language);
+        }elseif($translation){
+            return $translation;
+        }else{
+            return $this->getTranslations()->first();
+        }
+
+    }
+
+    public function getTranslations()
+    {
+        return $this->translations;
+
+    }
+
 }
