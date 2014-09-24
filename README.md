@@ -1,4 +1,4 @@
-ZendSkeletonApplication
+ZendJobsApplication
 =======================
 
 Introduction
