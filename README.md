@@ -33,5 +33,8 @@ then pass it to `tar`:
 
 You would then invoke `composer` to install dependencies per the previous
 example.
+
 Then:
-vendor/bin/doctrine-module orm:schema-tool:update --force
+-----
+
+    vendor/bin/doctrine-module orm:schema-tool:update --force
