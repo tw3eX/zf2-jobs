@@ -1,7 +1,6 @@
 <?php
 namespace Jobs\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="translations")
- *
+ * @package Jobs\Entity
  * @author Valeriy Zakharov <tw3exa@gmail.com>
  */
 class Translation
@@ -38,7 +37,7 @@ class Translation
      * @ORM\ManyToOne(targetEntity="Language")
      * @ORM\JoinColumn(name="language_id", referencedColumnName="id")
      **/
-    public $language;
+    protected $language;
 
     /**
      * @ORM\ManyToOne(targetEntity="Job", inversedBy="translations")
@@ -46,7 +45,13 @@ class Translation
      **/
     private $job;
 
-
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
 
     /**
      * @return string
@@ -57,20 +62,11 @@ class Translation
     }
 
     /**
-     * @return mixed
+     * @return Language
      */
     public function getLanguage()
     {
-        return $this->language->getName();
+        return $this->language;
     }
-
-    /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
 
 }

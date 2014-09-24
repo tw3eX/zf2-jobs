@@ -1,20 +1,29 @@
 <?php
 namespace Jobs\Form;
 
-use Zend\Form\Form;
 use Zend\Form\Element\Select;
-use Zend\Form\Element\Button;
+use Zend\Form\Form;
+
+/**
+ * Class FilterJobsForm
+ * @package Jobs\Form
+ */
 class FilterJobsForm extends Form
 {
-    public function __construct($departments,$languages)
+    /**
+     * @param \Doctrine\ORM\EntityManager $departments
+     * @param \Doctrine\ORM\EntityManager $languages
+     */
+    public function __construct($departments, $languages)
     {
         parent::__construct('Department');
         $this->setAttribute('method', 'post');
 
         $select = new  Select('departments');
         $select->setAttribute('class', 'form-control');
-        $departments_array = array(null => 'Без фильтра');
-        foreach($departments as $department){
+
+        $departments_array = array(null => '-- empty --');
+        foreach ($departments as $department) {
             $departments_array[$department->getId()] = $department->getName();
         }
         $select->setValueOptions($departments_array);
@@ -22,8 +31,8 @@ class FilterJobsForm extends Form
 
         $select = new  Select('languages');
         $select->setAttribute('class', 'form-control');
-        $languages_array = array(null => 'Без фильтра');
-        foreach($languages as $language){
+        $languages_array = array(null => '-- empty --');
+        foreach ($languages as $language) {
             $languages_array[$language->getName()] = $language->getName();
         }
         $select->setValueOptions($languages_array);
@@ -33,7 +42,7 @@ class FilterJobsForm extends Form
             'name' => 'submit',
             'type' => 'Submit',
             'attributes' => array(
-                'value' => 'Применить фильтр',
+                'value' => 'Apply filter',
                 'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),

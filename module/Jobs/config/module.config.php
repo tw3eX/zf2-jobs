@@ -1,5 +1,4 @@
 <?php
-// module/Jobs/config/module.config.php:
 return array(
     'controllers' => array(
         'invokables' => array(
@@ -7,18 +6,12 @@ return array(
         ),
     ),
 
-    'job_module_config' => array(
-        'default_translation' => 'en'
-    ),
-
-
-    // The following section is new and should be added to your file
     'router' => array(
         'routes' => array(
             'jobs' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/jobs[/:action][/:id]',
+                    'route'    => '/[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',

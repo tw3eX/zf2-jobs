@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="jobs")
- *
+ * @package Jobs\Entity
  * @author Valeriy Zakharov <tw3exa@gmail.com>
  */
 class Job
@@ -34,41 +34,67 @@ class Job
      **/
     private $translations;
 
+    /**
+     * new ArrayCollection
+     */
     public function __construct() {
         $this->translations = new ArrayCollection();
     }
 
-    public function getDepartment(){
-        return $this->department;
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**
-     * Get title.
+     * Get Department of this job
      *
-     * @return string
+     * @return Departament
+     */
+    public function getDepartment(){
+
+        return $this->department;
+    }
+
+
+    /**
+     * Get translation by slug.
+     *
+     * @return Translation
      */
     public function getTranslation($language)
     {
         $default_language = 'en';
 
         $translations = $this->translations->filter(function($translation) use ($language) {
-             return in_array($translation->getLanguage(), array($language));
+             return in_array($translation->getLanguage()->getName(), array($language));
          });
+
         $translation = $translations->first();
-        if(!$translation && $language != $default_language){
+
+        if(!$translation && $language != $default_language):
             return $this->getTranslation($default_language);
-        }elseif($translation){
+        elseif($translation):
             return $translation;
-        }else{
+        else:
             return $this->getTranslations()->first();
-        }
+        endif;
+
+
 
     }
 
+    /**
+     * Helper method, get all translations of this job
+     *
+     * @return ArrayCollection
+     */
     public function getTranslations()
     {
         return $this->translations;
-
     }
 
 }

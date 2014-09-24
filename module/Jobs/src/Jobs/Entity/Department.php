@@ -1,7 +1,6 @@
 <?php
 namespace Jobs\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity
  * @ORM\Table(name="departments")
- *
+ * @package Jobs\Entity
  * @author Valeriy Zakharov <tw3exa@gmail.com>
  */
 class Department

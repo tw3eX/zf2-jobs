@@ -1,36 +1,36 @@
+<?php
+$form = $this->filter_form;
+$form->prepare();
+?>
 
-    <?php
-    $form = $this->filter_form;
-    $form->prepare();
-    ?>
+<h3>Departments filter</h3>
+<?php echo $this->form()->openTag($form); ?>
+<?php echo $this->formRow($form->get('departments')); ?>
 
-    <h3>Отделы</h3>
-    <?php echo $this->form()->openTag($form);?>
-    <?php echo $this->formRow($form->get('departments')); ?>
-
-    <h3>Языки</h3>
-    <?php echo $this->formRow($form->get('languages')); ?>
-    <br/>
-    <?php echo $this->formSubmit($form->get('submit')); ?>
-    <?php echo $this->form()->closeTag(); ?>
-
-    <h3>Вакансии</h3>
-
-    <table class="table">
-        <thead>
-        <th class="col-md-3">Департамент</th>
-        <th class="col-md-9">Наименование вакансии</th>
-        </thead>
-        <tbody>
-    <?php foreach($this->jobs as $job) : $translation = $job->getTranslation($this->language); ?>
+<h3>Languages filter</h3>
+<?php echo $this->formRow($form->get('languages')); ?>
+<br/>
+<?php echo $this->formSubmit($form->get('submit')); ?>
+<?php echo $this->form()->closeTag(); ?>
+<br/>
+<table class="table">
+    <thead>
+        <th class="col-md-10">Job title</th>
+        <th class="col-md-2">Current translation</th>
+    </thead>
+    <tbody>
+    <?php foreach ($this->jobs as $job) : $translation = $job->getTranslation($this->language); ?>
 
         <tr>
-            <td><?php echo $job->getDepartment()->getName();?></td>
-            <td><?php echo $translation->getName();?></td>
-
+            <td>
+                <strong><?php echo $translation->getName(); ?>
+                    in <?php echo $job->getDepartment()->getName(); ?></strong>
+                <br>
+                <i><?php echo $translation->getDescription(); ?></i>
+            </td>
+            <td><?php echo $translation->getLanguage()->getName(); ?> </td>
         </tr>
 
-
-    <?php endforeach?>
-        </tbody>
-    </table>
+    <?php endforeach ?>
+    </tbody>
+</table>
