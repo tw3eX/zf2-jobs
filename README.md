@@ -38,3 +38,7 @@ Then:
 -----
 
     vendor/bin/doctrine-module orm:schema-tool:update --force
+
+Pictures
+-----
+![alt tag](http://static.zend.com/cmsdata/static-assets/img/zend-logo-big.gif)
