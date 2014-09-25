@@ -5,7 +5,7 @@ use Zend\Mvc;
 use Zend\ServiceManager\ServiceManager;
 use Zend\Mvc\Service\ServiceManagerConfig;
 
-class bootstrap
+class Bootstrap
 {
     static $serviceManager;
 
@@ -19,7 +19,7 @@ class bootstrap
 
         // Run application
         $config = require('config/application.config.php');
-        \Zend\Mvc\Application::init($config);
+        Mvc\Application::init($config);
 
         $serviceManager = new ServiceManager(new ServiceManagerConfig());
         $serviceManager->setService('ApplicationConfig', $config);
@@ -34,4 +34,4 @@ class bootstrap
     }
 }
 
-bootstrap::go();
+Bootstrap::go();

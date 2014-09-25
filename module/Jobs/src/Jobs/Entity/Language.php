@@ -9,10 +9,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="languages")
  * @package Jobs\Entity
- * @author Valeriy Zakharov <tw3exa@gmail.com>
+ * @author  Valeriy Zakharov <tw3exa@gmail.com>
  */
 class Language
 {
+
     /**
      * @var int
      * @ORM\Id
@@ -37,19 +38,19 @@ class Language
     }
 
     /**
-     * @return string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
      * @param int $id
      */
     public function setId($id)
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
     }
 
     /**
@@ -59,6 +60,5 @@ class Language
     {
         $this->name = $name;
     }
-
 
 }

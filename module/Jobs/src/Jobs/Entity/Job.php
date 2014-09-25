@@ -10,10 +10,11 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="jobs")
  * @package Jobs\Entity
- * @author Valeriy Zakharov <tw3exa@gmail.com>
+ * @author  Valeriy Zakharov <tw3exa@gmail.com>
  */
 class Job
 {
+
     /**
      * @var int
      * @ORM\Id
@@ -23,13 +24,14 @@ class Job
     protected $id;
 
     /**
-     * @var int
+     * @var Department
      * @ORM\ManyToOne(targetEntity="Department")
      * @ORM\JoinColumn(name="department_id", referencedColumnName="id")
      */
     protected $department;
 
     /**
+     * @var ArrayCollection
      * @ORM\OneToMany(targetEntity="Translation", mappedBy="job")
      **/
     protected $translations;
@@ -37,7 +39,8 @@ class Job
     /**
      * new ArrayCollection
      */
-    public function __construct() {
+    public function __construct()
+    {
         $this->translations = new ArrayCollection();
     }
 
@@ -50,39 +53,57 @@ class Job
     }
 
     /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
      * Get Department of this job
      *
-     * @return Departament
+     * @return Department
      */
-    public function getDepartment(){
+    public function getDepartment()
+    {
 
         return $this->department;
     }
 
+    /**
+     * @param Department $department
+     */
+    public function setDepartment(Department $department)
+    {
+        $this->department = $department;
+    }
 
     /**
      * Get translation by slug.
      *
+     * @param string $language
      * @return Translation
      */
     public function getTranslation($language)
     {
         $default_language = 'en';
 
-        $translations = $this->translations->filter(function($translation) use ($language) {
-             return in_array($translation->getLanguage()->getName(), array($language));
-         });
+        $translations = $this->translations->filter(
+            function ($translation) use ($language) {
+                return in_array($translation->getLanguage()->getName(), array($language));
+            }
+        );
 
         $translation = $translations->first();
 
-        if(!$translation && $language != $default_language):
+        if (!$translation && $language != $default_language):
             return $this->getTranslation($default_language);
-        elseif($translation):
+        elseif ($translation):
             return $translation;
         else:
             return $this->getTranslations()->first();
         endif;
-
 
 
     }
@@ -95,23 +116,6 @@ class Job
     public function getTranslations()
     {
         return $this->translations;
-    }
-
-
-    /**
-     * @param Department $department
-     */
-    public function setDepartment(Department $department)
-    {
-        $this->department = $department;
-    }
-
-    /**
-     * @param int $id
-     */
-    public function setId($id)
-    {
-        $this->id = $id;
     }
 
     /**

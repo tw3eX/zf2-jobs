@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity
  * @ORM\Table(name="departments")
  * @package Jobs\Entity
- * @author Valeriy Zakharov <tw3exa@gmail.com>
+ * @author  Valeriy Zakharov <tw3exa@gmail.com>
  */
 class Department
 {
@@ -28,8 +28,20 @@ class Department
      */
     protected $name;
 
-    public function getName(){
+    /**
+     * @return string
+     */
+    public function getName()
+    {
         return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -46,14 +58,6 @@ class Department
     public function setId($id)
     {
         $this->id = $id;
-    }
-
-    /**
-     * @param string $name
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
     }
 
 }

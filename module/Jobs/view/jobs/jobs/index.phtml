@@ -1,4 +1,7 @@
+<?php /* view file for index action */ ?>
+
 <?php
+/** @var $form \Jobs\Form\FilterJobsForm */
 $form = $this->filter_form;
 $form->prepare();
 ?>
@@ -15,12 +18,12 @@ $form->prepare();
 <br/>
 <table class="table">
     <thead>
-        <th class="col-md-10">Job title</th>
-        <th class="col-md-2">Current translation</th>
+    <th class="col-md-10">Job title</th>
+    <th class="col-md-2">Current translation</th>
     </thead>
     <tbody>
-    <?php foreach ($this->jobs as $job) : $translation = $job->getTranslation($this->language); ?>
-
+    <?php /** @var $job Jobs\Entity\Job */
+    foreach ($this->jobs as $job) : $translation = $job->getTranslation($this->language); ?>
         <tr>
             <td>
                 <strong><?php echo $translation->getName(); ?>
@@ -30,7 +33,6 @@ $form->prepare();
             </td>
             <td><?php echo $translation->getLanguage()->getName(); ?> </td>
         </tr>
-
     <?php endforeach ?>
     </tbody>
 </table>

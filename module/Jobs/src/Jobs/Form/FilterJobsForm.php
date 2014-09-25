@@ -7,22 +7,25 @@ use Zend\Form\Form;
 /**
  * Class FilterJobsForm
  * @package Jobs\Form
+ * @author  Valeriy Zakharov <tw3exa@gmail.com>
  */
 class FilterJobsForm extends Form
 {
+
     /**
      * @param \Doctrine\ORM\EntityManager $departments
      * @param \Doctrine\ORM\EntityManager $languages
      */
     public function __construct($departments, $languages)
     {
-        parent::__construct('Department');
+        parent::__construct('FilterForm');
         $this->setAttribute('method', 'post');
 
         $select = new  Select('departments');
         $select->setAttribute('class', 'form-control');
 
         $departments_array = array(null => '-- empty --');
+        /** @var $department \Jobs\Entity\Department */
         foreach ($departments as $department) {
             $departments_array[$department->getId()] = $department->getName();
         }
@@ -32,6 +35,7 @@ class FilterJobsForm extends Form
         $select = new  Select('languages');
         $select->setAttribute('class', 'form-control');
         $languages_array = array(null => '-- empty --');
+        /** @var $language \Jobs\Entity\Language */
         foreach ($languages as $language) {
             $languages_array[$language->getName()] = $language->getName();
         }
@@ -43,7 +47,6 @@ class FilterJobsForm extends Form
             'type' => 'Submit',
             'attributes' => array(
                 'value' => 'Apply filter',
-                'id' => 'submitbutton',
                 'class' => 'btn btn-primary',
             ),
         ));

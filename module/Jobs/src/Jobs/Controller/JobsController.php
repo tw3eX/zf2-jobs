@@ -1,13 +1,15 @@
 <?php
 namespace Jobs\Controller;
 
+use Jobs\Form\FilterJobsForm;
 use Zend\Mvc\Controller\AbstractActionController;
 use Zend\View\Model\ViewModel;
-use Jobs\Form\FilterJobsForm;
 
 /**
  * Class JobsController
+ *
  * @package Jobs\Controller
+ * @author  Valeriy Zakharov <tw3exa@gmail.com>
  */
 class JobsController extends AbstractActionController
 {
@@ -19,39 +21,45 @@ class JobsController extends AbstractActionController
     {
         $objectManager = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
 
+        /** @var $jobs \Doctrine\ORM\EntityRepository */
         $jobs = $objectManager
             ->getRepository('\Jobs\Entity\Job');
 
+        /** @var $departments \Doctrine\ORM\EntityManager */
         $departments = $objectManager
             ->getRepository('\Jobs\Entity\Department')
             ->findAll();
 
+        /** @var $languages \Doctrine\ORM\EntityManager */
         $languages = $objectManager
             ->getRepository('\Jobs\Entity\Language')
             ->findAll();
 
+        /** @var $request \Zend\Http\Request */
         $request = $this->getRequest();
 
-        if($request->getPost()->departments):
+        // filter by department
+        if ($request->getPost()->departments) {
             $jobs = $jobs->findByDepartment($request->getPost()->departments);
-        else:
+        } else {
             $jobs = $jobs->findAll();
-        endif;
+        }
 
-        if($request->getPost()->languages):
+        // filter by language
+        if ($request->getPost()->languages) {
             $language = $request->getPost()->languages;
-        else:
+        } else {
             $language = 'en';
-        endif;
+        }
 
         $form = new FilterJobsForm($departments, $languages);
         $form->setData($request->getPost());
 
         return new ViewModel(array(
-            'jobs' => $jobs,
+            'jobs'        => $jobs,
             'departments' => $departments,
             'filter_form' => $form,
-            'language' =>$language
+            'language'    => $language
         ));
     }
 

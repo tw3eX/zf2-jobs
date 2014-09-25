@@ -3,19 +3,19 @@ namespace Jobs;
 
 /**
  * Class Module
+ *
  * @package Jobs
+ * @author  Valeriy Zakharov <tw3exa@gmail.com>
  */
 class Module
 {
+
     /**
      * @return array
      */
     public function getAutoloaderConfig()
     {
         return array(
-            'Zend\Loader\ClassMapAutoloader' => array(
-                __DIR__ . '/autoload_classmap.php',
-            ),
             'Zend\Loader\StandardAutoloader' => array(
                 'namespaces' => array(
                     __NAMESPACE__ => __DIR__ . '/src/' . __NAMESPACE__,
@@ -25,36 +25,39 @@ class Module
     }
 
     /**
-     * @return mixed
+     * @return array
      */
     public function getConfig()
     {
         return include __DIR__ . '/config/module.config.php';
     }
 
+    /**
+     * @return array
+     */
     public function getServiceConfig()
     {
         return array(
             'factories' => array(
-                'DepartmentService' =>  function($sm)
-                    {
+                'DepartmentService'  => function ($sm) {
+                        /** @var $sm \Zend\ServiceManager\ServiceManager */
                         $em = $sm->get('Doctrine\ORM\EntityManager');
-                        return new \Jobs\Service\DepartmentService($sm, $em);
+                        return new Service\DepartmentService($sm, $em);
                     },
-                'LanguageService' =>  function($sm)
-                    {
+                'LanguageService'    => function ($sm) {
+                        /** @var $sm \Zend\ServiceManager\ServiceManager */
                         $em = $sm->get('Doctrine\ORM\EntityManager');
-                        return new \Jobs\Service\LanguageService($sm, $em);
+                        return new Service\LanguageService($sm, $em);
                     },
-                'JobService' =>  function($sm)
-                    {
+                'JobService'         => function ($sm) {
+                        /** @var $sm \Zend\ServiceManager\ServiceManager */
                         $em = $sm->get('Doctrine\ORM\EntityManager');
-                        return new \Jobs\Service\JobService($sm, $em);
+                        return new Service\JobService($sm, $em);
                     },
-                'TranslationService' =>  function($sm)
-                    {
+                'TranslationService' => function ($sm) {
+                        /** @var $sm \Zend\ServiceManager\ServiceManager */
                         $em = $sm->get('Doctrine\ORM\EntityManager');
-                        return new \Jobs\Service\TranslationService($sm, $em);
+                        return new  Service\TranslationService($sm, $em);
                     }
             ),
         );

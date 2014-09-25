@@ -11,7 +11,7 @@ return array(
             'jobs' => array(
                 'type'    => 'segment',
                 'options' => array(
-                    'route'    => '/[/:action][/:id]',
+                    'route'    => '/jobs[/:action][/:id]',
                     'constraints' => array(
                         'action' => '[a-zA-Z][a-zA-Z0-9_-]*',
                         'id'     => '[0-9]+',
@@ -41,7 +41,7 @@ return array(
 
     'view_manager' => array(
         'template_path_stack' => array(
-            'album' => __DIR__ . '/../view',
+            'jobs' => __DIR__ . '/../view',
         ),
     ),
 );
