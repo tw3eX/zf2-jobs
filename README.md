@@ -14,7 +14,7 @@ The recommended way to get a working copy of this project is to clone the reposi
 and use `composer` to install dependencies using the `create-project` command:
 
     curl -s https://getcomposer.org/installer | php --
-    php composer.phar create-project -sdev --repository-url="https://packages.zendframework.com" zendframework/skeleton-application path/to/install
+    git clone https://github.com/tw3eX/zf2-jobs.git
 
 Alternately, clone the repository and manually invoke `composer` using the shipped
 `composer.phar`:
