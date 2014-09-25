@@ -8,22 +8,11 @@ Veeam PHP Test
 Installation
 ------------
 
-Using Composer (recommended)
-----------------------------
-The recommended way to get a working copy of this project is to clone the repository
-and use `composer` to install dependencies using the `create-project` command:
-
-    curl -s https://getcomposer.org/installer | php --
     git clone https://github.com/tw3eX/zf2-jobs.git
-
-Alternately, clone the repository and manually invoke `composer` using the shipped
-`composer.phar`:
 
     php composer.phar self-update
     php composer.phar install
 
-You would then invoke `composer` to install dependencies per the previous
-example.
 
 Then:
 =======================
@@ -58,6 +47,47 @@ Sync db schema
 --------------
 
     vendor/bin/doctrine-module orm:schema-tool:update --force
+
+Demo Content
+------------
+    
+    INSERT INTO `departments` (`id`, `name`) VALUES
+    (1, 'IT Department'),
+    (2, 'Support Department');
+
+    INSERT INTO `jobs` (`id`, `department_id`) VALUES
+    (1, 1),
+    (2, 1),
+    (3, 1),
+    (6, 1),
+    (4, 2),
+    (5, 2),
+    (7, 2);
+
+    INSERT INTO `languages` (`id`, `name`) VALUES
+    (1, 'en'),
+    (2, 'ru'),
+    (3, 'fr');
+
+    INSERT INTO `translations` (`id`, `language_id`, `job_id`, `name`, `description`) VALUES
+    (1, 1, 1, 'PHP Developer', 'English description'),
+    (2, 1, 2, 'C++ Developer', 'English description'),
+    (3, 1, 3, 'Frontend Developer', 'English description'),
+    (4, 1, 4, 'Supporter', 'English description'),
+    (5, 1, 5, 'Caller   ', 'English description'),
+    (6, 1, 6, 'Middle PHP Developer', 'English description'),
+    (7, 1, 7, 'Manager', 'English description'),
+    (8, 2, 1, 'PHP разработчик', 'Русское описание'),
+    (9, 2, 2, 'C++ разработчик', 'Русское описание'),
+    (10, 2, 3, 'Фронтенд разработчик', 'Русское описание'),
+    (11, 2, 4, 'Сотрудник поддержки', 'Русское описание'),
+    (12, 2, 5, 'Холодные звонки', 'Русское описание'),
+    (13, 2, 6, 'Middle PHP разработчик', 'Русское описание'),
+    (14, 2, 7, 'Менеджер', 'Русское описание'),
+    (15, 3, 6, 'Moyen développeur PHP', 'Description français'),
+    (16, 3, 7, 'Directeur', 'Description français');
+
+and configure your server(apache2, nginx etc.)
 
 Pictures
 -----
