@@ -22,20 +22,40 @@ Alternately, clone the repository and manually invoke `composer` using the shipp
     php composer.phar self-update
     php composer.phar install
 
-(The `self-update` directive is to ensure you have an up-to-date `composer.phar`
-available.)
-
-Another alternative for downloading the project is to grab it via `curl`, and
-then pass it to `tar`:
-
-    cd my/project/dir
-    curl -#L https://github.com/zendframework/ZendSkeletonApplication/tarball/master | tar xz --strip-components=1
-
 You would then invoke `composer` to install dependencies per the previous
 example.
 
 Then:
------
+=======================
+
+Database config
+---------------
+Create 'config/autoload/doctrine.local.php' with this:
+
+    <?php
+    return array(
+        'doctrine' => array(
+            'connection' => array(
+                'orm_default' => array(
+                    'driverClass' =>'Doctrine\DBAL\Driver\PDOMySql\Driver',
+                    'params' => array(
+                        'host'     => 'localhost',
+                        'port'     => '3306',
+                        'user'     => 'root',
+                        'password' => 'pass',
+                        'dbname'   => 'zend',
+                        'charset' => 'utf8',
+                        'driverOptions' => array(
+                            1002=>'SET NAMES utf8'
+                        )
+                    )
+                )
+            ),
+        ),
+    );
+
+Sync db schema
+--------------
 
     vendor/bin/doctrine-module orm:schema-tool:update --force
 
