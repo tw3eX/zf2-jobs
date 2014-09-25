@@ -20,7 +20,7 @@ class LanguageTest extends \PHPUnit_Framework_TestCase
         $language = new \Jobs\Entity\Language();
 
         // Set language fields
-        $language->setId(123);
+        $language->setId(1);
         $language->setName('fr');
 
         // Mock the entity manager, find should return our dummy language
@@ -40,9 +40,7 @@ class LanguageTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf('Jobs\Entity\Language', $responseLanguage);
 
         // Check that the returned entity is our dummy language
-        $this->assertEquals(123, $responseLanguage->getId());
-        $this->assertNotEquals(124, $responseLanguage->getId());
+        $this->assertEquals(1, $responseLanguage->getId());
         $this->assertEquals('fr', $responseLanguage->getName());
-        $this->assertNotEquals('en', $responseLanguage->getName());
     }
 }

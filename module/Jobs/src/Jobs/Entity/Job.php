@@ -32,7 +32,7 @@ class Job
     /**
      * @ORM\OneToMany(targetEntity="Translation", mappedBy="job")
      **/
-    private $translations;
+    protected $translations;
 
     /**
      * new ArrayCollection
@@ -95,6 +95,32 @@ class Job
     public function getTranslations()
     {
         return $this->translations;
+    }
+
+
+    /**
+     * @param Department $department
+     */
+    public function setDepartment(Department $department)
+    {
+        $this->department = $department;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param Translation $translation
+     */
+    public function addTranslation(Translation $translation)
+    {
+        $translation->setJob($this);
+        $this->translations[] = $translation;
     }
 
 }

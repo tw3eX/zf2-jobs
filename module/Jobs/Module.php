@@ -45,6 +45,16 @@ class Module
                     {
                         $em = $sm->get('Doctrine\ORM\EntityManager');
                         return new \Jobs\Service\LanguageService($sm, $em);
+                    },
+                'JobService' =>  function($sm)
+                    {
+                        $em = $sm->get('Doctrine\ORM\EntityManager');
+                        return new \Jobs\Service\JobService($sm, $em);
+                    },
+                'TranslationService' =>  function($sm)
+                    {
+                        $em = $sm->get('Doctrine\ORM\EntityManager');
+                        return new \Jobs\Service\TranslationService($sm, $em);
                     }
             ),
         );

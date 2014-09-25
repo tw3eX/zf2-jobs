@@ -43,7 +43,23 @@ class Translation
      * @ORM\ManyToOne(targetEntity="Job", inversedBy="translations")
      * @ORM\JoinColumn(name="job_id", referencedColumnName="id")
      **/
-    private $job;
+    protected $job;
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getJob()
+    {
+        return $this->job;
+    }
 
     /**
      * @return string
@@ -51,6 +67,14 @@ class Translation
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * @param string $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 
     /**
@@ -67,6 +91,38 @@ class Translation
     public function getLanguage()
     {
         return $this->language;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+    }
+
+    /**
+     * @param Job $job
+     */
+    public function setJob(Job $job)
+    {
+        $this->job = $job;
+    }
+
+    /**
+     * @param Language $language
+     */
+    public function setLanguage(Language $language)
+    {
+        $this->language = $language;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 
 }

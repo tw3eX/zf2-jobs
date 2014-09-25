@@ -10,6 +10,7 @@ class DepartmentService extends ServiceBaseAbstract
      */
     public function getDepartmentById( $departmentId )
     {
+
         $department = $this->em->find('Application\Entity\Department',  $departmentId );
         return $department;
     }

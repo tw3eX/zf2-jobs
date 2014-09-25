@@ -13,6 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Department
 {
+
     /**
      * @var int
      * @ORM\Id

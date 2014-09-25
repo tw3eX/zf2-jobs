@@ -7,7 +7,7 @@ namespace Jobs\Service;
  * Abstract base class for all services
  * @package JobTest\Service
  */
-abstract class ServiceBaseAbstract
+ class ServiceBaseAbstract
 {
     // Doctrine Entity Manager
     protected $em;
